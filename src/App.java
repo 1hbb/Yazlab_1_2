@@ -18,10 +18,13 @@ public class App {
         loginThread.setName("Login Thread");
         loginThread.start();
 
-        
         ControlThread controlThread = new ControlThread();
         controlThread.setName("Control Thread");
         controlThread.start();
+
+        ExitThread exitThread = new ExitThread();
+        exitThread.setName("Exit Thread");
+        exitThread.start();
 
     }
 }

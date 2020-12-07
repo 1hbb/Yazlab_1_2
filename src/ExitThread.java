@@ -12,13 +12,21 @@ public class ExitThread extends Thread {
         list.add(0);
 
         if (floor == 1) {
-            App.FLOOR_1_QUEUE.add(list);
+            if (customer < App.FLOOR_1_ALL) {
+                App.FLOOR_1_QUEUE.add(list);
+            }
         } else if (floor == 2) {
-            App.FLOOR_2_QUEUE.add(list);
+            if (customer < App.FLOOR_2_ALL) {
+                App.FLOOR_2_QUEUE.add(list);
+            }
         } else if (floor == 3) {
-            App.FLOOR_3_QUEUE.add(list);
+            if (customer < App.FLOOR_3_ALL) {
+                App.FLOOR_3_QUEUE.add(list);
+            }
         } else if (floor == 4) {
-            App.FLOOR_4_QUEUE.add(list);
+            if (customer < App.FLOOR_4_ALL) {
+                App.FLOOR_4_QUEUE.add(list);
+            }
         }
 
     }
@@ -31,7 +39,8 @@ public class ExitThread extends Thread {
             } catch (Exception e) {
                 e.printStackTrace();
             }
-            
+            addToQueue();
+
         }
     }
 }

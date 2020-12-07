@@ -1,6 +1,5 @@
 import java.util.ArrayList;
 
-
 public class LoginThread extends Thread {
     private long LOGIN_INTERVAL = 500;
 
@@ -10,9 +9,18 @@ public class LoginThread extends Thread {
         ArrayList<Integer> list = new ArrayList<>();
         list.add(customer);
         list.add(floor);
-
         App.FLOOR_0_QUEUE.add(list);
-        System.out.println("Floor 0 queue: " + App.FLOOR_0_QUEUE);
+
+        System.out.println("0. floor: queue: " + App.FLOOR_0_QUEUE);
+        System.out.println("1. floor:" + "all:" + App.FLOOR_1_ALL + " queue: " + App.FLOOR_1_QUEUE);
+        System.out.println("2. floor:" + "all:" + App.FLOOR_2_ALL + " queue: " + App.FLOOR_2_QUEUE);
+        System.out.println("3. floor:" + "all:" + App.FLOOR_3_ALL + " queue: " + App.FLOOR_3_QUEUE);
+        System.out.println("4. floor:" + "all:" + App.FLOOR_4_ALL + " queue: " + App.FLOOR_4_QUEUE);
+        // System.out.println("Elevator1 current floor: " +
+        // ControlThread.Elevator1.FLOOR);
+        // System.out.println("Elevator1 inside: " + ControlThread.Elevator1.INSIDE);
+        // System.out.println("Elevator1 count inside: " +
+        // ControlThread.Elevator1.COUNT_INSIDE);
 
     }
 
@@ -26,7 +34,8 @@ public class LoginThread extends Thread {
             } catch (Exception e) {
                 e.printStackTrace();
             }
-            System.out.println("Running Thread Name:" + Thread.currentThread().getName());
+            // System.out.println("Running Thread Name:" +
+            // Thread.currentThread().getName());
             addCustomer();
         }
     }
