@@ -6,12 +6,6 @@
     "configurations": [
         {
             "type": "java",
-            "name": "Debug (Launch) - Current File",
-            "request": "launch",
-            "mainClass": "${file}"
-        },
-        {
-            "type": "java",
             "name": "Debug (Launch)-App<Yazlab_1_2_5752f860>",
             "request": "launch",
             "mainClass": "App",
