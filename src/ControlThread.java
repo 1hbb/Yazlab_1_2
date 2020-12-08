@@ -25,27 +25,30 @@ public class ControlThread extends Thread {
         elevator5.start();
 
         while (true) {
+            if (App.ALL_QUEUE > 20 && App.ALL_QUEUE < 40) {
+                elevator2.setMode("working");
+            }
+            if (App.ALL_QUEUE < 20) {
+                elevator2.setMode("idle");
+            }
 
-            if (App.ALL_QUEUE > 20) {
-                if (elevator2.MODE == "idle") {
-                    elevator2.setMode("working");
-                } else if (elevator3.MODE == "idle") {
-                    elevator3.setMode("working");
-                } else if (elevator4.MODE == "idle") {
-                    elevator4.setMode("working");
-                } else if (elevator5.MODE == "idle") {
-                    elevator5.setMode("working");
-                }
-            } else {
-                if (elevator2.MODE == "working") {
-                    elevator2.setMode("idle");
-                } else if (elevator3.MODE == "working") {
-                    elevator3.setMode("idle");
-                } else if (elevator4.MODE == "working") {
-                    elevator4.setMode("idle");
-                } else if (elevator5.MODE == "working") {
-                    elevator5.setMode("idle");
-                }
+            if (App.ALL_QUEUE > 40 && App.ALL_QUEUE < 60) {
+                elevator3.setMode("working");
+            }
+            if (App.ALL_QUEUE < 40) {
+                elevator3.setMode("idle");
+            }
+            if (App.ALL_QUEUE > 60 && App.ALL_QUEUE < 80) {
+                elevator4.setMode("working");
+            }
+            if (App.ALL_QUEUE < 60) {
+                elevator4.setMode("idle");
+            }
+            if (App.ALL_QUEUE > 80 && App.ALL_QUEUE < 100) {
+                elevator5.setMode("working");
+            }
+            if (App.ALL_QUEUE < 80) {
+                elevator5.setMode("idle");
             }
 
             try {

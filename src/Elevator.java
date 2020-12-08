@@ -6,7 +6,7 @@ public class Elevator extends Thread {
     public int FLOOR = 0;
     public int DESTINATION = 0;
     public String DIRECTION = "up";
-    public int CAPACITY = 10;
+    //public int CAPACITY = 10;
     public int COUNT_INSIDE = 0;
     public ArrayList<ArrayList<Integer>> INSIDE = new ArrayList<ArrayList<Integer>>();
     private int ELEVATOR_CAPACITY = 10;
@@ -27,7 +27,7 @@ public class Elevator extends Thread {
 
     }
 
-    public void setMode(String mode) {
+    public void setMode(String mode) { // setter function
         MODE = mode;
     }
 
@@ -44,28 +44,49 @@ public class Elevator extends Thread {
                 arrayList.add(capacity);
                 arrayList.add(queue.get(0).get(1));
 
-                // App.ALL_QUEUE -= capacity;
+                App.ALL_QUEUE -= capacity;
 
                 INSIDE.add(arrayList);
                 COUNT_INSIDE += capacity;
+                removerFromQueue(capacity);
 
             } else {
-                INSIDE.add(queue.get(0));
                 COUNT_INSIDE += queue.get(0).get(0);
+                INSIDE.add(queue.get(0));
 
-                // App.ALL_QUEUE -= queue.get(0).get(0);
+                App.ALL_QUEUE -= queue.get(0).get(0);
+                removerFromQueue(queue.get(0).get(0));
 
                 queue.remove(0);
 
             }
         }
+    }
 
+    public void removerFromQueue(int value) {
+        if (FLOOR == 0) {
+            App.FLOOR_0_QUEUE_COUNT -= value;
+
+        } else if (FLOOR == 1) {
+            App.FLOOR_1_QUEUE_COUNT -= value;
+
+        } else if (FLOOR == 2) {
+            App.FLOOR_2_QUEUE_COUNT -= value;
+
+        } else if (FLOOR == 3) {
+            App.FLOOR_3_QUEUE_COUNT -= value;
+
+        } else if (FLOOR == 4) {
+            App.FLOOR_4_QUEUE_COUNT -= value;
+
+        }
     }
 
     public void getPassenger() { // yolcu alma fonksiyonu
 
         if (FLOOR == 0) {
             getPassengerLogic(App.FLOOR_0_QUEUE);
+
         } else if (FLOOR == 1) {
             getPassengerLogic(App.FLOOR_1_QUEUE);
 
@@ -82,7 +103,8 @@ public class Elevator extends Thread {
 
     }
 
-    public int leavePassengerLogic(int value) { // yolcu indirme logic kısmı
+    public int leavePassengerLogic() { // yolcu indirme logic kısmı
+        int value = 0;
         for (int i = 0; i < INSIDE.size(); i++) {
             if (FLOOR == INSIDE.get(i).get(1)) {
                 value += INSIDE.get(i).get(0);
@@ -100,24 +122,25 @@ public class Elevator extends Thread {
 
     public void leavePassenger() { // yolcu indirme foknsiyonu
         if (FLOOR == 0) {
-            App.FLOOR_0_ALL = leavePassengerLogic(App.FLOOR_0_ALL);
+            leavePassengerLogic();
+
         } else if (FLOOR == 1) {
-            App.FLOOR_1_ALL = leavePassengerLogic(App.FLOOR_1_ALL);
+            App.FLOOR_1_ALL = leavePassengerLogic();
 
         } else if (FLOOR == 2) {
-            App.FLOOR_2_ALL = leavePassengerLogic(App.FLOOR_2_ALL);
+            App.FLOOR_2_ALL = leavePassengerLogic();
 
         } else if (FLOOR == 3) {
-            App.FLOOR_3_ALL = leavePassengerLogic(App.FLOOR_3_ALL);
+            App.FLOOR_3_ALL = leavePassengerLogic();
 
         } else if (FLOOR == 4) {
-            App.FLOOR_4_ALL = leavePassengerLogic(App.FLOOR_4_ALL);
+            App.FLOOR_4_ALL = leavePassengerLogic();
 
         }
     }
 
     public void runElevator() { // asansörü çalıştırma fonskiyonu
-        System.out.println(Thread.currentThread().getName() + " Elevator current floor: " + FLOOR);
+        System.out.println(Thread.currentThread().getName() + " Elevator currentfloor: " + FLOOR);
 
         leavePassenger(); // yolcu bırak
         getPassenger(); // yolcu al
@@ -131,15 +154,13 @@ public class Elevator extends Thread {
     @Override
     public void run() {
         while (true) {
+            if (MODE == "working") {
+                runElevator();
+            }
             try {
                 Thread.sleep(ELEVATOR_INTERVAL);
             } catch (Exception e) {
                 e.printStackTrace();
-            }
-            // System.out.println("Running Thread Name:" +
-            // Thread.currentThread().getName());
-            if (MODE == "working") {
-                runElevator();
             }
         }
     }

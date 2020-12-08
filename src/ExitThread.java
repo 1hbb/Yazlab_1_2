@@ -4,11 +4,12 @@ public class ExitThread extends Thread {
 
     private long EXIT_INTERVAL = 1000;
 
-    public void calculateAllQueue() {
-        App.ALL_QUEUE = App.FLOOR_0_QUEUE_COUNT + App.FLOOR_1_QUEUE_COUNT + App.FLOOR_2_QUEUE_COUNT
-                + App.FLOOR_3_QUEUE_COUNT + App.FLOOR_4_QUEUE_COUNT;
+    // public void calculateAllQueue() {
+    // App.ALL_QUEUE = App.FLOOR_0_QUEUE_COUNT + App.FLOOR_1_QUEUE_COUNT +
+    // App.FLOOR_2_QUEUE_COUNT
+    // + App.FLOOR_3_QUEUE_COUNT + App.FLOOR_4_QUEUE_COUNT;
 
-    }
+    // }
 
     public void addToQueue() {
         int floor = (int) (Math.random() * 4) + 1;
@@ -52,8 +53,6 @@ public class ExitThread extends Thread {
                 e.printStackTrace();
             }
             addToQueue();
-            calculateAllQueue();
-
         }
     }
 }
