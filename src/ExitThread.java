@@ -4,6 +4,12 @@ public class ExitThread extends Thread {
 
     private long EXIT_INTERVAL = 1000;
 
+    public void calculateAllQueue() {
+        App.ALL_QUEUE = App.FLOOR_0_QUEUE_COUNT + App.FLOOR_1_QUEUE_COUNT + App.FLOOR_2_QUEUE_COUNT
+                + App.FLOOR_3_QUEUE_COUNT + App.FLOOR_4_QUEUE_COUNT;
+
+    }
+
     public void addToQueue() {
         int floor = (int) (Math.random() * 4) + 1;
         int customer = (int) (Math.random() * 5) + 1;
@@ -11,21 +17,27 @@ public class ExitThread extends Thread {
         list.add(customer);
         list.add(0);
 
+        // App.ALL_QUEUE += customer;
+
         if (floor == 1) {
             if (customer < App.FLOOR_1_ALL) {
                 App.FLOOR_1_QUEUE.add(list);
+                App.FLOOR_1_QUEUE_COUNT += customer;
             }
         } else if (floor == 2) {
             if (customer < App.FLOOR_2_ALL) {
                 App.FLOOR_2_QUEUE.add(list);
+                App.FLOOR_2_QUEUE_COUNT += customer;
             }
         } else if (floor == 3) {
             if (customer < App.FLOOR_3_ALL) {
                 App.FLOOR_3_QUEUE.add(list);
+                App.FLOOR_3_QUEUE_COUNT += customer;
             }
         } else if (floor == 4) {
             if (customer < App.FLOOR_4_ALL) {
                 App.FLOOR_4_QUEUE.add(list);
+                App.FLOOR_4_QUEUE_COUNT += customer;
             }
         }
 
@@ -40,6 +52,7 @@ public class ExitThread extends Thread {
                 e.printStackTrace();
             }
             addToQueue();
+            calculateAllQueue();
 
         }
     }

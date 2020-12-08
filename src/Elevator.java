@@ -1,14 +1,14 @@
 import java.util.ArrayList;
 
 public class Elevator extends Thread {
-    private long ELEVATOR_INTERVAL = 200;
-    public static String MODE = "working";
-    public static int FLOOR = 0;
-    public static int DESTINATION = 0;
-    public static String DIRECTION = "up";
-    public static int CAPACITY = 10;
-    public static int COUNT_INSIDE = 0;
-    public static ArrayList<ArrayList<Integer>> INSIDE = new ArrayList<ArrayList<Integer>>();
+    public long ELEVATOR_INTERVAL = 200;
+    public String MODE = "idle";
+    public int FLOOR = 0;
+    public int DESTINATION = 0;
+    public String DIRECTION = "up";
+    public int CAPACITY = 10;
+    public int COUNT_INSIDE = 0;
+    public ArrayList<ArrayList<Integer>> INSIDE = new ArrayList<ArrayList<Integer>>();
     private int ELEVATOR_CAPACITY = 10;
 
     public void moveElevator() {
@@ -27,6 +27,10 @@ public class Elevator extends Thread {
 
     }
 
+    public void setMode(String mode) {
+        MODE = mode;
+    }
+
     public void getPassengerLogic(ArrayList<ArrayList<Integer>> queue) { // yolcu alma logic kısmı
 
         while (COUNT_INSIDE < ELEVATOR_CAPACITY && queue.isEmpty() == false) {
@@ -40,13 +44,17 @@ public class Elevator extends Thread {
                 arrayList.add(capacity);
                 arrayList.add(queue.get(0).get(1));
 
+                // App.ALL_QUEUE -= capacity;
+
                 INSIDE.add(arrayList);
                 COUNT_INSIDE += capacity;
-                queue.remove(0);
 
             } else {
                 INSIDE.add(queue.get(0));
                 COUNT_INSIDE += queue.get(0).get(0);
+
+                // App.ALL_QUEUE -= queue.get(0).get(0);
+
                 queue.remove(0);
 
             }
@@ -79,6 +87,9 @@ public class Elevator extends Thread {
             if (FLOOR == INSIDE.get(i).get(1)) {
                 value += INSIDE.get(i).get(0);
                 COUNT_INSIDE -= INSIDE.get(i).get(0);
+
+                // App.ALL_QUEUE -= INSIDE.get(i).get(0);
+
                 value += INSIDE.get(i).get(0);
 
                 INSIDE.remove(i);
@@ -106,14 +117,14 @@ public class Elevator extends Thread {
     }
 
     public void runElevator() { // asansörü çalıştırma fonskiyonu
-        System.out.println("Elevator current floor: " + FLOOR);
+        System.out.println(Thread.currentThread().getName() + " Elevator current floor: " + FLOOR);
 
         leavePassenger(); // yolcu bırak
         getPassenger(); // yolcu al
         moveElevator(); // asansörü sıradaki kata hareket ettir
 
-        System.out.println("inside: " + INSIDE);
-        System.out.println("count inside: " + COUNT_INSIDE);
+        System.out.println(Thread.currentThread().getName() + " inside: " + INSIDE);
+        System.out.println(Thread.currentThread().getName() + " count inside: " + COUNT_INSIDE);
 
     }
 
@@ -127,7 +138,9 @@ public class Elevator extends Thread {
             }
             // System.out.println("Running Thread Name:" +
             // Thread.currentThread().getName());
-            runElevator();
+            if (MODE == "working") {
+                runElevator();
+            }
         }
     }
 }

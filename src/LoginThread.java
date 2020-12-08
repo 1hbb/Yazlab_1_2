@@ -9,18 +9,18 @@ public class LoginThread extends Thread {
         ArrayList<Integer> list = new ArrayList<>();
         list.add(customer);
         list.add(floor);
+
         App.FLOOR_0_QUEUE.add(list);
 
-        System.out.println("0. floor: queue: " + App.FLOOR_0_QUEUE);
-        System.out.println("1. floor:" + "all:" + App.FLOOR_1_ALL + " queue: " + App.FLOOR_1_QUEUE);
-        System.out.println("2. floor:" + "all:" + App.FLOOR_2_ALL + " queue: " + App.FLOOR_2_QUEUE);
-        System.out.println("3. floor:" + "all:" + App.FLOOR_3_ALL + " queue: " + App.FLOOR_3_QUEUE);
-        System.out.println("4. floor:" + "all:" + App.FLOOR_4_ALL + " queue: " + App.FLOOR_4_QUEUE);
-        // System.out.println("Elevator1 current floor: " +
-        // ControlThread.Elevator1.FLOOR);
-        // System.out.println("Elevator1 inside: " + ControlThread.Elevator1.INSIDE);
-        // System.out.println("Elevator1 count inside: " +
-        // ControlThread.Elevator1.COUNT_INSIDE);
+        //App.ALL_QUEUE += customer;
+        App.FLOOR_0_QUEUE_COUNT += customer;
+
+        System.out.println("All queue count: " + App.ALL_QUEUE);
+        System.out.println("0. floor: queue: " + App.FLOOR_0_QUEUE_COUNT);
+        System.out.println("1. floor:" + "all:" + App.FLOOR_1_ALL + " queue: " + App.FLOOR_1_QUEUE_COUNT);
+        System.out.println("2. floor:" + "all:" + App.FLOOR_2_ALL + " queue: " + App.FLOOR_2_QUEUE_COUNT);
+        System.out.println("3. floor:" + "all:" + App.FLOOR_3_ALL + " queue: " + App.FLOOR_3_QUEUE_COUNT);
+        System.out.println("4. floor:" + "all:" + App.FLOOR_4_ALL + " queue: " + App.FLOOR_4_QUEUE_COUNT);
 
     }
 
@@ -34,8 +34,6 @@ public class LoginThread extends Thread {
             } catch (Exception e) {
                 e.printStackTrace();
             }
-            // System.out.println("Running Thread Name:" +
-            // Thread.currentThread().getName());
             addCustomer();
         }
     }
