@@ -1,7 +1,7 @@
 import java.util.ArrayList;
 
 public class LoginThread extends Thread {
-    private long LOGIN_INTERVAL = 1000;
+    private long LOGIN_INTERVAL = 500;
 
     public void calculateAllQueue() {
         App.ALL_QUEUE = App.FLOOR_0_QUEUE_COUNT + App.FLOOR_1_QUEUE_COUNT + App.FLOOR_2_QUEUE_COUNT
@@ -24,7 +24,7 @@ public class LoginThread extends Thread {
 
     public void addCustomer() {
         int floor = (int) (Math.random() * 4) + 1;
-        int customer = (int) (Math.random() * 4) + 1;
+        int customer = (int) (Math.random() * 10) + 1;
         ArrayList<Integer> list = new ArrayList<>();
         list.add(customer);
         list.add(floor);

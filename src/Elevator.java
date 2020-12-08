@@ -6,7 +6,6 @@ public class Elevator extends Thread {
     public int FLOOR = 0;
     public int DESTINATION = 0;
     public String DIRECTION = "up";
-    //public int CAPACITY = 10;
     public int COUNT_INSIDE = 0;
     public ArrayList<ArrayList<Integer>> INSIDE = new ArrayList<ArrayList<Integer>>();
     private int ELEVATOR_CAPACITY = 10;
