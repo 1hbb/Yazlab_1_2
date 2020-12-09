@@ -8,19 +8,23 @@ public class Elevator extends Thread {
     public String DIRECTION = "up";
     public int COUNT_INSIDE = 0;
     public ArrayList<ArrayList<Integer>> INSIDE = new ArrayList<ArrayList<Integer>>();
-    private int ELEVATOR_CAPACITY = 10;
+    public int ELEVATOR_CAPACITY = 10;
 
     public void moveElevator() {
 
         if (DIRECTION == "up") {
             FLOOR++;
+            DESTINATION = FLOOR + 1;
             if (FLOOR == 4) {
                 DIRECTION = "down";
+                DESTINATION -= 2;
             }
         } else if (DIRECTION == "down") {
             FLOOR--;
+            DESTINATION = FLOOR - 1;
             if (FLOOR == 0) {
                 DIRECTION = "up";
+                DESTINATION += 2;
             }
         }
 
@@ -139,14 +143,16 @@ public class Elevator extends Thread {
     }
 
     public void runElevator() { // asansörü çalıştırma fonskiyonu
-        System.out.println(Thread.currentThread().getName() + " Elevator currentfloor: " + FLOOR);
+        // System.out.println(Thread.currentThread().getName() + " Elevator
+        // currentfloor: " + FLOOR);
 
         leavePassenger(); // yolcu bırak
         getPassenger(); // yolcu al
         moveElevator(); // asansörü sıradaki kata hareket ettir
 
-        System.out.println(Thread.currentThread().getName() + " inside: " + INSIDE);
-        System.out.println(Thread.currentThread().getName() + " count inside: " + COUNT_INSIDE);
+        // System.out.println(Thread.currentThread().getName() + " inside: " + INSIDE);
+        // System.out.println(Thread.currentThread().getName() + " count inside: " +
+        // COUNT_INSIDE);
 
     }
 

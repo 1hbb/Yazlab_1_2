@@ -9,19 +9,6 @@ public class LoginThread extends Thread {
 
     }
 
-    public void printInfos() {
-        System.out.println("All queue count: " + App.ALL_QUEUE);
-        System.out.println("0. floor: queue: " + App.FLOOR_0_QUEUE_COUNT + " array: " + App.FLOOR_0_QUEUE);
-        System.out.println("1. floor:" + "all:" + App.FLOOR_1_ALL + " queue: " + App.FLOOR_1_QUEUE_COUNT + " array: "
-                + App.FLOOR_1_QUEUE);
-        System.out.println("2. floor:" + "all:" + App.FLOOR_2_ALL + " queue: " + App.FLOOR_2_QUEUE_COUNT + " array: "
-                + App.FLOOR_2_QUEUE);
-        System.out.println("3. floor:" + "all:" + App.FLOOR_3_ALL + " queue: " + App.FLOOR_3_QUEUE_COUNT + " array: "
-                + App.FLOOR_3_QUEUE);
-        System.out.println("4. floor:" + "all:" + App.FLOOR_4_ALL + " queue: " + App.FLOOR_4_QUEUE_COUNT + " array: "
-                + App.FLOOR_4_QUEUE);
-    }
-
     public void addCustomer() {
         int floor = (int) (Math.random() * 4) + 1;
         int customer = (int) (Math.random() * 10) + 1;
@@ -46,7 +33,6 @@ public class LoginThread extends Thread {
             }
             addCustomer();
             calculateAllQueue();
-            printInfos();
         }
     }
 }

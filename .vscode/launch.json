@@ -4,12 +4,11 @@
     // For more information, visit: https://go.microsoft.com/fwlink/?linkid=830387
     "version": "0.2.0",
     "configurations": [
-        {
-            "type": "java",
-            "name": "Debug (Launch)-App<Yazlab_1_2_5752f860>",
-            "request": "launch",
-            "mainClass": "App",
-            "projectName": "Yazlab_1_2_5752f860"
-        }
+    {
+        "type": "java",
+        "name": "Debug (Launch)",
+        "request": "launch",
+        "mainClass": "App"
+    },
     ]
 }
