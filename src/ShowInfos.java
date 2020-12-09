@@ -3,7 +3,7 @@ public class ShowInfos {
     public static final String ANSI_RED_BACKGROUND = "\u001B[41m";
     public static final String RESET_COLOR = "\033[0m";
 
-    public static void printFloorInfos() {
+    public void printFloorInfos() {
         System.out.println("All queue count: " + App.ALL_QUEUE);
         System.out.println("0. floor: queue: " + App.FLOOR_0_QUEUE_COUNT + " queue array: " + App.FLOOR_0_QUEUE);
         System.out.println("1. floor:" + "all:" + App.FLOOR_1_ALL + " queue: " + App.FLOOR_1_QUEUE_COUNT
@@ -17,8 +17,9 @@ public class ShowInfos {
         System.out.println();
 
     }
+    
 
-    public static void printElevatorInfos(Elevator elevator) {
+    public void printElevatorInfos(Elevator elevator) {
         System.out.println(elevator.getName().toUpperCase());
         if (elevator.MODE == "working") {
             System.out.println(ANSI_GREEN_BACKGROUND + "mode: " + elevator.MODE + RESET_COLOR);

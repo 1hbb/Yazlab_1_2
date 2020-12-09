@@ -11,7 +11,7 @@ public class LoginThread extends Thread {
 
     public void addCustomer() {
         int floor = (int) (Math.random() * 4) + 1;
-        int customer = (int) (Math.random() * 10) + 1;
+        int customer = (int) (Math.random() * 20) + 1;
         ArrayList<Integer> list = new ArrayList<>();
         list.add(customer);
         list.add(floor);

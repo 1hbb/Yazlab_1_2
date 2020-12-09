@@ -34,12 +34,15 @@ public class Elevator extends Thread {
         MODE = mode;
     }
 
-    public void getPassengerLogic(ArrayList<ArrayList<Integer>> queue) { // yolcu alma logic kısmı
+    public ArrayList<ArrayList<Integer>> getPassengerLogic(ArrayList<ArrayList<Integer>> list) { // yolcu alma logic
+                                                                                                 // kısmı
+        ArrayList<ArrayList<Integer>> queue = new ArrayList<ArrayList<Integer>>();
+        queue = list;
 
         while (COUNT_INSIDE < ELEVATOR_CAPACITY && queue.isEmpty() == false) {
 
             int capacity = ELEVATOR_CAPACITY - COUNT_INSIDE;
-            if (queue.get(0).get(0) > capacity) {
+            if (queue.get(0).get(0) > capacity && queue.isEmpty() == false) {
                 int tmp = queue.get(0).get(0);
                 queue.get(0).set(0, tmp - capacity);
 
@@ -55,15 +58,18 @@ public class Elevator extends Thread {
 
             } else {
 
-                COUNT_INSIDE += queue.get(0).get(0);
-                INSIDE.add(queue.get(0));
+                if (queue.isEmpty() == false) {
+                    COUNT_INSIDE += queue.get(0).get(0);
+                    INSIDE.add(queue.get(0));
 
-                App.ALL_QUEUE -= queue.get(0).get(0);
-                removerFromQueue(queue.get(0).get(0));
+                    App.ALL_QUEUE -= queue.get(0).get(0);
+                    removerFromQueue(queue.get(0).get(0));
 
-                queue.remove(0);
+                    queue.remove(0);
+                }
             }
         }
+        return queue;
     }
 
     public void removerFromQueue(int value) {
@@ -108,19 +114,19 @@ public class Elevator extends Thread {
     public void getPassenger() { // yolcu alma fonksiyonu
 
         if (FLOOR == 0) {
-            getPassengerLogic(App.FLOOR_0_QUEUE);
+            App.FLOOR_0_QUEUE = getPassengerLogic(App.FLOOR_0_QUEUE);
 
         } else if (FLOOR == 1) {
-            getPassengerLogic(App.FLOOR_1_QUEUE);
+            App.FLOOR_1_QUEUE = getPassengerLogic(App.FLOOR_1_QUEUE);
 
         } else if (FLOOR == 2) {
-            getPassengerLogic(App.FLOOR_2_QUEUE);
+            App.FLOOR_2_QUEUE = getPassengerLogic(App.FLOOR_2_QUEUE);
 
         } else if (FLOOR == 3) {
-            getPassengerLogic(App.FLOOR_3_QUEUE);
+            App.FLOOR_3_QUEUE = getPassengerLogic(App.FLOOR_3_QUEUE);
 
         } else if (FLOOR == 4) {
-            getPassengerLogic(App.FLOOR_4_QUEUE);
+            App.FLOOR_4_QUEUE = getPassengerLogic(App.FLOOR_4_QUEUE);
 
         }
 
