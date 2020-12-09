@@ -54,6 +54,7 @@ public class Elevator extends Thread {
                 removerFromQueue(capacity);
 
             } else {
+
                 COUNT_INSIDE += queue.get(0).get(0);
                 INSIDE.add(queue.get(0));
 
@@ -61,26 +62,45 @@ public class Elevator extends Thread {
                 removerFromQueue(queue.get(0).get(0));
 
                 queue.remove(0);
-
             }
         }
     }
 
     public void removerFromQueue(int value) {
         if (FLOOR == 0) {
-            App.FLOOR_0_QUEUE_COUNT -= value;
+            int x = 0;
+            for (int i = 0; i < App.FLOOR_0_QUEUE.size(); i++) {
+                x += App.FLOOR_0_QUEUE.get(i).get(0);
+            }
+            App.FLOOR_0_QUEUE_COUNT = x;
 
         } else if (FLOOR == 1) {
-            App.FLOOR_1_QUEUE_COUNT -= value;
+            int x = 0;
+            for (int i = 0; i < App.FLOOR_1_QUEUE.size(); i++) {
+                x += App.FLOOR_1_QUEUE.get(i).get(i);
+            }
+            App.FLOOR_1_QUEUE_COUNT = x;
 
         } else if (FLOOR == 2) {
-            App.FLOOR_2_QUEUE_COUNT -= value;
-
+            int x = 0;
+            // App.FLOOR_2_QUEUE_COUNT -= value;
+            for (int i = 0; i < App.FLOOR_2_QUEUE.size(); i++) {
+                x += App.FLOOR_2_QUEUE.get(i).get(i);
+            }
+            App.FLOOR_2_QUEUE_COUNT = x;
         } else if (FLOOR == 3) {
-            App.FLOOR_3_QUEUE_COUNT -= value;
+            int x = 0;
+            for (int i = 0; i < App.FLOOR_3_QUEUE.size(); i++) {
+                x += App.FLOOR_3_QUEUE.get(i).get(i);
+            }
+            App.FLOOR_3_QUEUE_COUNT = x;
 
         } else if (FLOOR == 4) {
-            App.FLOOR_4_QUEUE_COUNT -= value;
+            int x = 0;
+            for (int i = 0; i < App.FLOOR_4_QUEUE.size(); i++) {
+                x += App.FLOOR_4_QUEUE.get(i).get(i);
+            }
+            App.FLOOR_4_QUEUE_COUNT = x;
 
         }
     }

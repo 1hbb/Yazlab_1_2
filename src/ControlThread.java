@@ -28,26 +28,30 @@ public class ControlThread extends Thread {
             ShowInfos.printFloorInfos();
             ShowInfos.printElevatorInfos(elevator1);
 
-            if (App.ALL_QUEUE > 20 && App.ALL_QUEUE < 40) {
+            if (App.ALL_QUEUE > 20 && App.ALL_QUEUE < 40 && elevator2.FLOOR != elevator1.FLOOR) {
                 elevator2.setMode("working");
             }
             if (App.ALL_QUEUE < 20 && elevator2.COUNT_INSIDE == 0) {
                 elevator2.setMode("idle");
             }
 
-            if (App.ALL_QUEUE > 40 && App.ALL_QUEUE < 60) {
+            if (App.ALL_QUEUE > 40 && App.ALL_QUEUE < 60 && elevator1.FLOOR != elevator3.FLOOR
+                    && elevator2.FLOOR != elevator3.FLOOR) {
                 elevator3.setMode("working");
             }
             if (App.ALL_QUEUE < 40 && elevator3.COUNT_INSIDE == 0) {
                 elevator3.setMode("idle");
             }
-            if (App.ALL_QUEUE > 60 && App.ALL_QUEUE < 80) {
+            if (App.ALL_QUEUE > 60 && App.ALL_QUEUE < 80 && elevator4.FLOOR != elevator1.FLOOR
+                    && elevator4.FLOOR != elevator2.FLOOR && elevator4.FLOOR != elevator3.FLOOR) {
                 elevator4.setMode("working");
             }
             if (App.ALL_QUEUE < 60 && elevator4.COUNT_INSIDE == 0) {
                 elevator4.setMode("idle");
             }
-            if (App.ALL_QUEUE > 80 && App.ALL_QUEUE < 100) {
+            if (App.ALL_QUEUE > 80 && App.ALL_QUEUE < 100 && elevator5.FLOOR != elevator1.FLOOR
+                    && elevator5.FLOOR != elevator2.FLOOR && elevator5.FLOOR != elevator3.FLOOR
+                    && elevator5.FLOOR != elevator4.FLOOR) {
                 elevator5.setMode("working");
             }
             if (App.ALL_QUEUE < 80 && elevator5.COUNT_INSIDE == 0) {
@@ -60,7 +64,7 @@ public class ControlThread extends Thread {
             ShowInfos.printElevatorInfos(elevator5);
 
             try {
-                Thread.sleep(500);
+                Thread.sleep(200);
             } catch (Exception e) {
                 e.printStackTrace();
             }
