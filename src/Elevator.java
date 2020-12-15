@@ -10,7 +10,7 @@ public class Elevator extends Thread {
     public ArrayList<ArrayList<Integer>> INSIDE = new ArrayList<ArrayList<Integer>>();
     public int ELEVATOR_CAPACITY = 10;
 
-    public void moveElevator() {
+    public void moveElevator() { //asansörü hareket ettirme kısmı
 
         if (DIRECTION == "up") {
             FLOOR++;
@@ -42,7 +42,7 @@ public class Elevator extends Thread {
         while (COUNT_INSIDE < ELEVATOR_CAPACITY && queue.isEmpty() == false) {
 
             int capacity = ELEVATOR_CAPACITY - COUNT_INSIDE;
-            if (queue.get(0).get(0) > capacity && queue.isEmpty() == false) {
+            if (queue.get(0).get(0) > capacity) {
                 int tmp = queue.get(0).get(0);
                 queue.get(0).set(0, tmp - capacity);
 
@@ -58,15 +58,14 @@ public class Elevator extends Thread {
 
             } else {
 
-                if (queue.isEmpty() == false) {
-                    COUNT_INSIDE += queue.get(0).get(0);
-                    INSIDE.add(queue.get(0));
+                COUNT_INSIDE += queue.get(0).get(0);
+                INSIDE.add(queue.get(0));
 
-                    App.ALL_QUEUE -= queue.get(0).get(0);
-                    removerFromQueue(queue.get(0).get(0));
+                App.ALL_QUEUE -= queue.get(0).get(0);
+                removerFromQueue(queue.get(0).get(0));
 
-                    queue.remove(0);
-                }
+                queue.remove(0);
+
             }
         }
         return queue;
@@ -169,29 +168,22 @@ public class Elevator extends Thread {
     }
 
     public void runElevator() { // asansörü çalıştırma fonskiyonu
-        // System.out.println(Thread.currentThread().getName() + " Elevator
-        // currentfloor: " + FLOOR);
-
         leavePassenger(); // yolcu bırak
         getPassenger(); // yolcu al
         moveElevator(); // asansörü sıradaki kata hareket ettir
-
-        // System.out.println(Thread.currentThread().getName() + " inside: " + INSIDE);
-        // System.out.println(Thread.currentThread().getName() + " count inside: " +
-        // COUNT_INSIDE);
-
     }
 
     @Override
     public void run() {
         while (true) {
-            if (MODE == "working") {
-                runElevator();
-            }
+
             try {
+                if (MODE == "working") {
+                    runElevator();
+                }
                 Thread.sleep(ELEVATOR_INTERVAL);
             } catch (Exception e) {
-                e.printStackTrace();
+                // e.printStackTrace();
             }
         }
     }
